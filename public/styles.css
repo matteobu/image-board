@@ -1,0 +1,22 @@
+body {
+    background-color: deeppink;
+}
+
+#main {
+    height: 200px;
+
+    background-color: firebrick;
+    display: flex;
+    border: 2px solid deepskyblue;
+    justify-content: space-between;
+}
+
+.imgbox {
+    height: 100px;
+    width: 100px;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}

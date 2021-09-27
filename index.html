@@ -2,9 +2,45 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>IMAGE-BOARD</title>
 </head>
 <body>
+    <div id="main">
+        <!-- <h1 v-bind:title="name + '!'">{{name}}</h1>
+        <h1 :title="name + '!'">{{name}}</h1>  
+        <h2>{{age}}</h2>
+        <p>{{ 'Hello World!' }}
+        <p>2 + 2 = {{ 2 + 2 }}
+        <div v-if="age == 18">
+            <h3 v-for="h in headings" @mouseover="setName(h)" >{{h}} </h3>
+        </div>
+        <input v-model="age"> -->
+
+        <div class="imgbox" v-for="image in images">
+            <img :src="image.url">
+            {{image.title}}
+          </div>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
 </body>
 </html>
+
+
+<!-- COMMENT -->
+<!--     v-bind: può essere chiamato anche solo con : -->
+<!-- v-on:mouseout="setAge(10)" -->
+<!-- V-on: abbreviazione = @ -->
+
+<!-- CODE FROM FIRST ENCOUNTER
+<div id="main">
+    <h1 v-bind:title="name + '!'">{{name}}</h1>
+    <h1 :title="name + '!'">{{name}}</h1>  
+    <h2>{{age}}</h2>
+    <p>{{ 'Hello World!' }}
+    <p>2 + 2 = {{ 2 + 2 }}
+    <div v-if="age == 18">
+        <h3 v-for="h in headings" @mouseover="setName(h)" >{{h}} </h3>
+    </div>
+    <input v-model="age">
+</div> -->

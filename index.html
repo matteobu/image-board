@@ -8,19 +8,9 @@
 </head>
 <body>
     <div id="main">
-        <!-- <h1 v-bind:title="name + '!'">{{name}}</h1>
-        <h1 :title="name + '!'">{{name}}</h1>  
-        <h2>{{age}}</h2>
-        <p>{{ 'Hello World!' }}
-        <p>2 + 2 = {{ 2 + 2 }}
-        <div v-if="age == 18">
-            <h3 v-for="h in headings" @mouseover="setName(h)" >{{h}} </h3>
-        </div>
-        <input v-model="age"> -->
-
-        <div class="imgbox" v-for="image in images">
+          <div class="imgbox" v-for="image in images">
             <img :src="image.url">
-            {{image.title}}
+           <h4>{{image.title}}</h4> 
           </div>
     <script src="/js/app.js" type="module" crossorigin="use-credentials"></script>
 </body>

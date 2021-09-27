@@ -8,5 +8,7 @@ const db = spicedPg(
 );
 
 module.exports.exportImages = () => {
-    return db.query(`SELECT url, username, title, description FROM images`);
+    return db.query(
+        `SELECT url, username, title, description, created_at FROM images ORDER BY id DESC`
+    );
 };

@@ -1,32 +1,46 @@
 import * as Vue from "./vue.js";
 
 Vue.createApp({
-    // In the data function you must return an object
-    // with an images property.
-    // The value of this property
-    // cannot be set to anything useful until the app mounts.
-    // The initial value can be an empty array or null
-    // but the property must be there.
     data() {
         return {
             images: [],
+            title: "",
+            description: "",
+            username: "",
+            file: null,
         };
     },
-    // In the mounted function
-    // it should make a network request using fetch
-    // to get the image objects
-    // when the request is successful,
-    // it should set the images data property to the array
-    // retrieved
 
     mounted() {
         console.log("MOUNTED");
         fetch("/images")
             .then((response) => response.json())
             .then(({ rows }) => {
-                console.log({ rows });
+                // console.log({ rows });
                 this.images = rows;
-            });
+            })
+            .catch(console.log);
+    },
+
+    methods: {
+        clickHandler() {
+            const fd = new FormData();
+            fd.append("title", this.title);
+            fd.append("description", this.description);
+            fd.append("username", this.username);
+            fd.append("file", this.file);
+            fetch("/upload", {
+                method: "POST",
+                body: fd,
+            })
+                .then((response) => response.json())
+                .then((result) => console.log(result))
+                .catch((err) => console.log(err));
+        },
+        fileSelectHandler(e) {
+            this.file = e.target.files[0];
+            // console.log("e :>> ", e.target.files[0]);
+        },
     },
 }).mount("#main");
 

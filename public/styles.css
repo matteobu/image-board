@@ -1,22 +1,64 @@
 body {
     background-color: #334756;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 #main {
     height: 300px;
-    /* background-color: #334756; */
-    display: flex;
-    /* border: 2px solid #f0a500; */
-    justify-content: space-around;
 }
 
-.imgbox {
+.title {
     display: flex;
-    flex-direction: column;
+    color: #f0a500;
+    justify-content: center;
+    flex-direction: row;
+    border-bottom: 1px solid #f0a500;
+}
+.form-input {
+    padding: 10px;
+    padding-left: 50px;
+    border-bottom: 1px solid #f0a500;
+}
+input {
+    color: #334756;
+    background-color: #f0a500;
+    margin: 5px;
+    border: 0px;
+    border-radius: 10px;
+    height: 20px;
+}
+
+::placeholder {
+    color: #334756;
+    padding-left: 5px;
+}
+
+button {
+    width: 70px;
+    background-color: #f0a500;
+    border: 0px;
+    border-radius: 10px;
+    height: 20px;
+    color: #334756;
+}
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.image-item {
+    display: flex;
+    flex-direction: row;
     border: 2px solid #f0a500;
     height: 300px;
     width: 300px;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 img {
@@ -26,12 +68,4 @@ img {
 
 h4 {
     color: #f0a500;
-    justify-content: center;
 }
-
-/* justify-self: center;
-justify-items: center;
-
-align-self: center;
-align-items: center;
-align-content: center; */

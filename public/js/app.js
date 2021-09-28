@@ -12,7 +12,7 @@ Vue.createApp({
     },
 
     mounted() {
-        console.log("MOUNTED");
+        // console.log("MOUNTED");
         fetch("/images")
             .then((response) => response.json())
             .then(({ rows }) => {
@@ -34,7 +34,13 @@ Vue.createApp({
                 body: fd,
             })
                 .then((response) => response.json())
-                .then((result) => console.log(result))
+                .then((result) => {
+                    console.log("RESULT CLICK HANLDER:>> ", result);
+                    this.images.unshift(result[0]);
+                    // PUSH THE OBJECT TO THE ARRAY
+
+                    // console.log(result);
+                })
                 .catch((err) => console.log(err));
         },
         fileSelectHandler(e) {

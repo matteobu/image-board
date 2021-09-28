@@ -55,10 +55,12 @@ button {
     display: flex;
     flex-direction: row;
     border: 2px solid #f0a500;
+    background-color:linen;
     height: 300px;
     width: 300px;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 10px;
 }
 
 img {

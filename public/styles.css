@@ -44,7 +44,7 @@ button {
 }
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     justify-content: space-around;
     justify-items: center;
     align-items: center;
@@ -55,17 +55,20 @@ button {
     display: flex;
     flex-direction: row;
     border: 2px solid #f0a500;
-    background-color:linen;
+    background-color: linen;
     height: 300px;
     width: 300px;
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px;
+    margin: 15px;
 }
 
 img {
     height: 200px;
     width: 300px;
+    object-fit: cover;
+
 }
 
 h4 {

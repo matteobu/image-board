@@ -1,4 +1,9 @@
 import * as Vue from "./vue.js";
+// import { myComponent } from "./my-component.js";
+import { imageModal } from "./image-modal.js";
+
+// console.log(imageModal);
+// console.log(myComponent);
 
 Vue.createApp({
     data() {
@@ -8,9 +13,9 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
+            currentImageId: null,
         };
     },
-
     mounted() {
         // console.log("MOUNTED");
         fetch("/images")
@@ -21,7 +26,6 @@ Vue.createApp({
             })
             .catch(console.log);
     },
-
     methods: {
         clickHandler() {
             const fd = new FormData();
@@ -37,16 +41,22 @@ Vue.createApp({
                 .then((result) => {
                     console.log("RESULT CLICK HANLDER:>> ", result);
                     this.images.unshift(result[0]);
-                    // PUSH THE OBJECT TO THE ARRAY
-
-                    // console.log(result);
                 })
                 .catch((err) => console.log(err));
         },
         fileSelectHandler(e) {
             this.file = e.target.files[0];
-            // console.log("e :>> ", e.target.files[0]);
         },
+        modalOpenClose(id) {
+            console.log("VALUE OF ID on APP:  ", id);
+            this.currentImageId = this.currentImageId == null ? id : null;
+            console.log("VALUE OF CURRENTimgID on APP: ", this.currentImageId);
+        },
+    },
+
+    components: {
+        // "my-component": myComponent,
+        "image-modal": imageModal,
     },
 }).mount("#main");
 

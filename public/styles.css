@@ -16,9 +16,12 @@ body {
     border-bottom: 1px solid #f0a500;
 }
 .form-input {
+    display: flex;
     padding: 10px;
     padding-left: 50px;
     border-bottom: 1px solid #f0a500;
+    justify-content: center;
+    align-items: center;
 }
 input {
     color: #334756;
@@ -41,6 +44,7 @@ button {
     border-radius: 10px;
     height: 20px;
     color: #334756;
+    cursor: pointer;
 }
 .image-grid {
     display: grid;
@@ -68,9 +72,64 @@ img {
     height: 200px;
     width: 300px;
     object-fit: cover;
-
+    border: 2px solid dimgray;
 }
 
 h4 {
     color: #f0a500;
+}
+
+/* MODAL */
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 99;
+    position: fixed;
+
+}
+
+.image-grid-modal {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(400px, 1fr));
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.image-modal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 2px solid #f0a500;
+    background-color: linen;
+    height: 500px;
+    width: 500px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    margin: 15px;
+    z-index: 98;
+}
+
+.img-in-modal {
+    height: 350px;
+    width: 450px;
+    object-fit: cover;
+    border: 2px solid dimgray;
+}
+
+h5 {
+    font-style: italic;
+}
+
+h6 {
+    font-size: 16px;
+    color: #334756;
+    margin: 0;
 }

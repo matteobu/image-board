@@ -18,7 +18,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     if (req.file) {
         db.uploadImages(url, username, title, description).then((response) => {
             // console.log("response.rows :>> ", response.rows);
-
             res.json(response.rows);
         });
     } else {
@@ -30,6 +29,11 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 
 app.get("/images", (req, res) => {
     db.exportImages().then(({ rows }) => {
+        return res.json({ rows });
+    });
+});
+app.get("/data/:id", (req, res) => {
+    db.exportImageInfo(req.params.id).then(({ rows }) => {
         return res.json({ rows });
     });
 });

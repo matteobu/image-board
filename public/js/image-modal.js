@@ -16,7 +16,7 @@ const modal = {
                 // console.log("rows :>> ", rows);
                 // data = {}
                 Object.assign(this, rows[0]);
-                console.log("this :>> ", this.url);
+                // console.log("this :>> ", this.url);
             });
         console.log("IM MOUNTED");
     },

@@ -90,7 +90,6 @@ h4 {
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 99;
     position: fixed;
-
 }
 
 .image-grid-modal {
@@ -108,7 +107,7 @@ h4 {
     flex-wrap: wrap;
     border: 2px solid #f0a500;
     background-color: linen;
-    height: 500px;
+    height: 700px;
     width: 500px;
     flex-wrap: wrap;
     justify-content: center;
@@ -132,4 +131,8 @@ h6 {
     font-size: 16px;
     color: #334756;
     margin: 0;
+}
+
+.comment-modal {
+    background-color: deeppink;
 }

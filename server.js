@@ -8,16 +8,11 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    // console.log("req.body :>> ", req.body);
-    // console.log("req.file :>> ", req.file);
-    // console.log("POST /upload.json Router");
-
     const { title, description, username } = req.body;
     const { filename } = req.file;
     let url = `https://s3.amazonaws.com/spicedling/${filename}`;
     if (req.file) {
         db.uploadImages(url, username, title, description).then((response) => {
-            // console.log("response.rows :>> ", response.rows);
             res.json(response.rows);
         });
     } else {
@@ -27,6 +22,20 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     }
 });
 
+app.get("/comments/:id", (req, res) => {
+    db.getComments(req.params.id).then(({ rows }) => {
+        return res.json({ rows });
+    });
+});
+
+app.post("/comments", (req, res) => {
+    console.log(req.body.id);
+    const { username, comment, id } = req.body;
+    db.insertAndExportComment(username, comment, id).then(({ rows }) => {
+        return res.json({ rows });
+    });
+});
+
 app.get("/images", (req, res) => {
     db.exportImages().then(({ rows }) => {
         return res.json({ rows });
@@ -34,6 +43,12 @@ app.get("/images", (req, res) => {
 });
 app.get("/data/:id", (req, res) => {
     db.exportImageInfo(req.params.id).then(({ rows }) => {
+        return res.json({ rows });
+    });
+});
+
+app.get("/images/:lastIdOnScreen", (req, res) => {
+    db.exportMoreImages(req.params.lastIdOnScreen).then(({ rows }) => {
         return res.json({ rows });
     });
 });

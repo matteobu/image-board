@@ -14,6 +14,9 @@ Vue.createApp({
             username: "",
             file: null,
             currentImageId: null,
+            lastIdOnScreen: null,
+            lowestId: null,
+            morebutton: true,
         };
     },
     mounted() {
@@ -21,7 +24,7 @@ Vue.createApp({
         fetch("/images")
             .then((response) => response.json())
             .then(({ rows }) => {
-                // console.log({ rows });
+                // console.log("this is the first ROWS of OBJECTS", { rows });
                 this.images = rows;
             })
             .catch(console.log);
@@ -39,63 +42,41 @@ Vue.createApp({
             })
                 .then((response) => response.json())
                 .then((result) => {
-                    console.log("RESULT CLICK HANLDER:>> ", result);
+                    // console.log("RESULT CLICK HANLDER:>> ", result);
                     this.images.unshift(result[0]);
                 })
                 .catch((err) => console.log(err));
         },
+
+        moreImages() {
+            let lastImage = this.images.length - 1;
+            this.lastIdOnScreen = this.images[lastImage].id;
+
+            fetch("/images/" + this.lastIdOnScreen)
+                .then((response) => response.json())
+                .then(({ rows }) => {
+                    let lastObject = rows.length - 1;
+                    let ultimo = rows[lastObject].id;
+                    if (ultimo == rows[0].lowestId) {
+                        this.morebutton = false;
+                    }
+
+                    for (let i = 0; i < rows.length; i++) {
+                        this.images.push(rows[i]);
+                    }
+                })
+                .catch((err) => console.log(err));
+        },
+
         fileSelectHandler(e) {
             this.file = e.target.files[0];
         },
         modalOpenClose(id) {
-            console.log("VALUE OF ID on APP:  ", id);
             this.currentImageId = this.currentImageId == null ? id : null;
-            console.log("VALUE OF CURRENTimgID on APP: ", this.currentImageId);
         },
     },
 
     components: {
-        // "my-component": myComponent,
         "image-modal": imageModal,
     },
 }).mount("#main");
-
-// data: function() {}
-// data() {}
-// CODE FROM ENCOUNTER
-// data() {
-//     return {
-//         name: "funky chicken",
-//         age: 18,
-//         headings: [
-//             "a good heading",
-//             "a less good heading",
-//             "a much better heading",
-//         ],
-//     };
-// },
-// // created() {
-// //     console.log("CREATED");
-// // },
-// mounted() {
-//     console.log("MOUNTED");
-//     fetch("/headings")
-//         .then((response) => {
-//             response.json();
-//         })
-//         .then(({ headings }) => {
-//             console.log(headings);
-//             this.headings = headings;
-//         });
-// },
-
-// // updated() {
-// //     console.log("UPDATED");
-// // },
-
-// methods: {
-//     setName(headings) {
-//         console.log(headings);
-//         this.name = headings;
-//     },
-// },

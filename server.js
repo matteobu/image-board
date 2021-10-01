@@ -8,7 +8,6 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-
     const { title, description, username } = req.body;
     const { filename } = req.file;
     let url = `https://s3.amazonaws.com/spicedling/${filename}`;
@@ -47,6 +46,19 @@ app.get("/data/:id", (req, res) => {
         return res.json({ rows });
     });
 });
+
+// app.get("/:id", (req, res) => {
+//     db.exportImageInfo(req.params.id).then(({ rows }) => {
+//         if (rows.length <= 0) {
+//             history.replaceState({}, "", "/");
+
+//             console.log("NO ROWS");
+//         } else {
+//             console.log("rows in SERVER SIDE :>> ", rows);
+//             res.redirect("/" + req.params.id);
+//         }
+//     });
+// });
 
 app.get("/images/:lastIdOnScreen", (req, res) => {
     db.exportMoreImages(req.params.lastIdOnScreen).then(({ rows }) => {

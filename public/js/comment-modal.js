@@ -7,12 +7,12 @@ const comment = {
         };
     },
     mounted() {
-        console.log("IM MOUNTED");
+        console.log("Comment Modal MOUNTED");
         fetch("/comments/" + this.id)
             .then((response) => response.json())
             .then(({ rows }) => {
                 this.comments = rows;
-                console.log(this.comments);
+                // console.log(this.comments);
             });
     },
 
@@ -21,8 +21,8 @@ const comment = {
     <h6>I'M THE COMMENT COMPONENT AND IM BEAUTIFUL</h6>
     
     <form class="form-input">
-    <input v-model="comment" type="text" name="comment" placeholder="comment">
-    <input v-model="username" type="text" name="username" placeholder="username">
+    <input v-model="comment" type="text" name="comment" placeholder="comment" autocomplete="off">
+    <input v-model="username" type="text" name="username" placeholder="username" autocomplete="off">
     <button @click.prevent="submitComment" type="submit">SUBMIT</button>
 
     </form>
@@ -36,7 +36,7 @@ const comment = {
     `,
     methods: {
         submitComment() {
-            console.log("add comment", this.username, this.comment, this.id);
+            // console.log("add comment", this.username, this.comment, this.id);
 
             const newComment = {};
             newComment.username = this.username;
@@ -51,7 +51,10 @@ const comment = {
                 body: JSON.stringify(newComment),
             })
                 .then((response) => response.json())
-                .then((result) => console.log(result))
+                .then(({ rows }) => {
+                    console.log("result :>> ", rows);
+                    this.comments.unshift(rows[0]);
+                })
                 .catch((err) => console.log(err));
         },
     },

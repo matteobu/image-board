@@ -12,15 +12,20 @@ const modal = {
         };
     },
     mounted() {
+        console.log("Image Modal MOUNTED");
+
         fetch("/data/" + this.id)
             .then((response) => response.json())
             .then(({ rows }) => {
-                // console.log("rows :>> ", rows);
-                // data = {}
-                Object.assign(this, rows[0]);
-                // console.log("this :>> ", this.url);
+                if (rows.length <= 0) {
+                    
+                    this.$emit("modal-off");
+
+                } else {
+                    console.log("rows IN IMAGE MODAL SIDE:>> ", rows);
+                    Object.assign(this, rows[0]);
+                }
             });
-        console.log("IM MOUNTED");
     },
     methods: {
         functionToCloseModal() {

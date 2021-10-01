@@ -14,14 +14,14 @@ Vue.createApp({
             username: "",
             file: null,
             // currentImageId: null,
-            currentImageId: location.pathname.slice(1),
+            currentImageId: location.pathname.slice(1) || null,
             lastIdOnScreen: null,
             lowestId: null,
             morebutton: true,
         };
     },
     mounted() {
-        // console.log("MOUNTED");
+        console.log("Vue APP MOUNTED");
         fetch("/images")
             .then((response) => response.json())
             .then(({ rows }) => {
@@ -29,6 +29,12 @@ Vue.createApp({
                 this.images = rows;
             })
             .catch(console.log);
+
+        addEventListener("popstate", (e) => {
+            console.log(location.pathname, e.state);
+            // show whatever is appropriate for the new url
+            // if you need it, e.state has the data you passed to `pushState`
+        });
     },
     methods: {
         clickHandler() {
@@ -75,13 +81,18 @@ Vue.createApp({
         modalOpenClose(id) {
             if (id) {
                 history.pushState({}, "", "/" + id);
+                console.log("IF", location.pathname.slice(1));
             } else {
                 history.pushState({}, "", "/");
+                console.log("ELSE", location.pathname.slice(1));
             }
-            this.currentImageId =
-                this.currentImageId == location.pathname.slice(1)
-                    ? id
-                    : location.pathname.slice(1);
+            this.currentImageId = this.currentImageId == null ? id : null;
+
+            console.log("OUTSIDE THE IF ELSE", location.pathname.slice(1));
+        },
+
+        historyReplace() {
+            history.pushState({}, "", "/");
         },
     },
 

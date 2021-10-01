@@ -8,6 +8,7 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+
     const { title, description, username } = req.body;
     const { filename } = req.file;
     let url = `https://s3.amazonaws.com/spicedling/${filename}`;

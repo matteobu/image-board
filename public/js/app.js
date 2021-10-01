@@ -13,7 +13,8 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
-            currentImageId: null,
+            // currentImageId: null,
+            currentImageId: location.pathname.slice(1),
             lastIdOnScreen: null,
             lowestId: null,
             morebutton: true,
@@ -72,7 +73,15 @@ Vue.createApp({
             this.file = e.target.files[0];
         },
         modalOpenClose(id) {
-            this.currentImageId = this.currentImageId == null ? id : null;
+            if (id) {
+                history.pushState({}, "", "/" + id);
+            } else {
+                history.pushState({}, "", "/");
+            }
+            this.currentImageId =
+                this.currentImageId == location.pathname.slice(1)
+                    ? id
+                    : location.pathname.slice(1);
         },
     },
 

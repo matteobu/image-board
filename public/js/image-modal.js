@@ -35,7 +35,7 @@ const modal = {
     <img class="img-in-modal" :src="url">
     <h4>{{title}}</h4> 
     <h6>{{description}}</h6> 
-    <h6 @click="functionToCloseModal()">close</h6>
+    <h6 @click="functionToCloseModal(null)">close</h6>
     <h5>uploaded by {{username}} on {{created_at}}</h5> 
 
     

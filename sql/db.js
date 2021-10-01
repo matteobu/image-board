@@ -69,6 +69,19 @@ module.exports.getComments = (id) => {
     const q = `SELECT * FROM comments WHERE image_id=$1`;
     return db.query(q, params);
 };
+
+module.exports.deleteComments = (id) => {
+    const params = [id];
+    const q = `DELETE FROM comments 
+    WHERE image_id =$1`;
+    return db.query(q, params);
+};
+module.exports.deleteImage = (id) => {
+    const params = [id];
+    const q = `DELETE FROM images WHERE id =$1`;
+    return db.query(q, params);
+};
+
 // comment TEXT,
 // username VARCHAR NOT NULL,
 // created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

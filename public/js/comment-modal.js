@@ -17,10 +17,8 @@ const comment = {
     },
 
     props: ["id"],
-    template: `<div class="comment-modal">
-    <h6>I'M THE COMMENT COMPONENT AND IM BEAUTIFUL</h6>
-    
-    <form class="form-input">
+    template: `<div class="comment-modal">   
+    <form class="comment-input">
     <input v-model="comment" type="text" name="comment" placeholder="comment" autocomplete="off">
     <input v-model="username" type="text" name="username" placeholder="username" autocomplete="off">
     <button @click.prevent="submitComment" type="submit">SUBMIT</button>
@@ -28,7 +26,7 @@ const comment = {
     </form>
     <div id="comment-grid">
     <div v-for="comment in comments">
-        <h6>{{comment.username}} commented {{comment.comment}} on {{comment.created_at}}</h6>
+        <h5>{{comment.username}} commented {{comment.comment}} on {{comment.created_at}}</h5></>
     </div>
 </div>
     </div>
@@ -52,7 +50,7 @@ const comment = {
             })
                 .then((response) => response.json())
                 .then(({ rows }) => {
-                    console.log("result :>> ", rows);
+                    // console.log("result :>> ", rows);
                     this.comments.unshift(rows[0]);
                 })
                 .catch((err) => console.log(err));

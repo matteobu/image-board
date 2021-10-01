@@ -9,7 +9,7 @@ const component = {
         changeHeadingAndRequestNameChange() {
             this.heading = "im gettin tired ";
             this.$emit("namechange", Date.now());
-            console.log(this.color);
+            // console.log(this.color);
         },
     },
     props: ["color", "age"],

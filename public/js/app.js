@@ -3,7 +3,7 @@ import * as Vue from "./vue.js";
 import { imageModal } from "./image-modal.js";
 
 // console.log(imageModal);
-// console.log(myComponent);
+// (myComponent);
 
 Vue.createApp({
     data() {
@@ -13,7 +13,6 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
-            // currentImageId: null,
             currentImageId: location.pathname.slice(1) || null,
             lastIdOnScreen: null,
             lowestId: null,
@@ -21,6 +20,11 @@ Vue.createApp({
         };
     },
     mounted() {
+        addEventListener("popstate", (e) => {
+            // console.log(location.pathname, e.state);
+            this.currentImageId = location.pathname.slice(1) || null;
+        });
+
         console.log("Vue APP MOUNTED");
         fetch("/images")
             .then((response) => response.json())
@@ -29,12 +33,6 @@ Vue.createApp({
                 this.images = rows;
             })
             .catch(console.log);
-
-        addEventListener("popstate", (e) => {
-            console.log(location.pathname, e.state);
-            // show whatever is appropriate for the new url
-            // if you need it, e.state has the data you passed to `pushState`
-        });
     },
     methods: {
         clickHandler() {
@@ -81,18 +79,36 @@ Vue.createApp({
         modalOpenClose(id) {
             if (id) {
                 history.pushState({}, "", "/" + id);
-                console.log("IF", location.pathname.slice(1));
+                // console.log("IF", location.pathname.slice(1));
             } else {
                 history.pushState({}, "", "/");
-                console.log("ELSE", location.pathname.slice(1));
+                // console.log("ELSE", location.pathname.slice(1));
             }
             this.currentImageId = this.currentImageId == null ? id : null;
 
-            console.log("OUTSIDE THE IF ELSE", location.pathname.slice(1));
+            // console.log("OUTSIDE THE IF ELSE", location.pathname.slice(1));
         },
 
         historyReplace() {
-            history.pushState({}, "", "/");
+            history.replaceState({}, "", "/");
+            this.currentImageId = this.currentImageId == null;
+        },
+
+        deleteImage() {
+            // console.log(
+            //     "delete IMAGE function currentImageId:>> ",
+            //     this.currentImageId
+            // );
+            fetch("/delete/" + this.currentImageId)
+                .then((result) => {
+                    console.log("result :>> ", result);
+                    this.currentImageId = null;
+                    history.pushState({}, "", "/");
+                    // FILTER THE IMAGES FROM THE ARRAY TO REMOVE IT
+                })
+                .catch((err) => {
+                    console.log("err :>> ", err);
+                });
         },
     },
 

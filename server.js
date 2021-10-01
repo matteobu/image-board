@@ -29,7 +29,7 @@ app.get("/comments/:id", (req, res) => {
 });
 
 app.post("/comments", (req, res) => {
-    console.log(req.body.id);
+    // console.log(req.body.id);
     const { username, comment, id } = req.body;
     db.insertAndExportComment(username, comment, id).then(({ rows }) => {
         return res.json({ rows });
@@ -41,24 +41,24 @@ app.get("/images", (req, res) => {
         return res.json({ rows });
     });
 });
+
+app.get("/delete/:currentImageId", (req, res) => {
+    // ("still getting the id :>> ", req.params.currentImageId);
+    db.deleteComments(req.params.currentImageId)
+        .then(() => {
+            return db.deleteImage(req.params.currentImageId);
+        })
+        .then(() => {
+            console.log("result from ");
+            return res.status(201).end();
+        });
+});
+
 app.get("/data/:id", (req, res) => {
     db.exportImageInfo(req.params.id).then(({ rows }) => {
         return res.json({ rows });
     });
 });
-
-// app.get("/:id", (req, res) => {
-//     db.exportImageInfo(req.params.id).then(({ rows }) => {
-//         if (rows.length <= 0) {
-//             history.replaceState({}, "", "/");
-
-//             console.log("NO ROWS");
-//         } else {
-//             console.log("rows in SERVER SIDE :>> ", rows);
-//             res.redirect("/" + req.params.id);
-//         }
-//     });
-// });
 
 app.get("/images/:lastIdOnScreen", (req, res) => {
     db.exportMoreImages(req.params.lastIdOnScreen).then(({ rows }) => {
@@ -67,6 +67,7 @@ app.get("/images/:lastIdOnScreen", (req, res) => {
 });
 
 app.get("*", (req, res) => {
+    // console.log("request path", req.path);
     res.sendFile(`${__dirname}/index.html`);
 });
 

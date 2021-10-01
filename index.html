@@ -12,7 +12,7 @@
 
         <!-- <my-component color="red" v-bind:age="age" v-on:namechange="changeName"></my-component> -->
         <!-- <image-modal v-if="currentImageId"  @close="closeModal"></image-modal> -->
-        <image-modal v-bind:id="currentImageId" v-on:modal-off="modalOpenClose" v-on:modal-off-error="historyReplace"v-if="currentImageId" :id="currentImageId"> </image-modal>
+        <image-modal v-bind:id="currentImageId" v-on:modal-off="modalOpenClose" v-on:delete-image="deleteImage" v-on:off-error="historyReplace" v-if="currentImageId" :id="currentImageId"> </image-modal>
 
         <div class="title"><h1>📷 OLD CARS BOARD  📸</h1></div>
         <form class="form-input">

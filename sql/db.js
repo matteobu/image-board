@@ -9,7 +9,11 @@ const db = spicedPg(
 
 module.exports.exportImages = () => {
     return db.query(
-        `SELECT * 
+        `SELECT *,(
+            SELECT id FROM images
+            ORDER BY id ASC
+            LIMIT 1
+        ) AS "lowestId"  
         FROM images 
         ORDER BY id DESC
         LIMIT 6`
@@ -22,7 +26,8 @@ module.exports.exportMoreImages = (lastIdOnScreen) => {
                     SELECT id FROM images
                     ORDER BY id ASC
                     LIMIT 1
-                ) AS "lowestId" FROM images
+                ) AS "lowestId" 
+                FROM images
                 WHERE id < $1
                 ORDER BY id DESC
                 LIMIT 6;`,

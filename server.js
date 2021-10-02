@@ -49,7 +49,7 @@ app.get("/delete/:currentImageId", (req, res) => {
             return db.deleteImage(req.params.currentImageId);
         })
         .then(() => {
-            console.log("result from ");
+            // console.log("result from ");
             return res.status(201).end();
         });
 });

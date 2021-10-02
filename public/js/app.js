@@ -1,9 +1,7 @@
 import * as Vue from "./vue.js";
-// import { myComponent } from "./my-component.js";
 import { imageModal } from "./image-modal.js";
 
-// console.log(imageModal);
-// (myComponent);
+
 
 Vue.createApp({
     data() {
@@ -31,6 +29,13 @@ Vue.createApp({
             .then(({ rows }) => {
                 // console.log("this is the first ROWS of OBJECTS", { rows });
                 this.images = rows;
+                let lastObject = rows.length - 1;
+                let ultimo = rows[lastObject].id;
+                if (ultimo == rows[0].lowestId) {
+                    this.morebutton = false;
+                }
+
+                // console.log("THIS.IMAGES after FETCH /images:>> ", this.images);
             })
             .catch(console.log);
     },
@@ -99,12 +104,16 @@ Vue.createApp({
             //     "delete IMAGE function currentImageId:>> ",
             //     this.currentImageId
             // );
+            let imageToFilter = this.currentImageId;
+            this.images = this.images.filter(function filterByID(item) {
+                if (item.id !== imageToFilter) {
+                    return true;
+                }
+            });
             fetch("/delete/" + this.currentImageId)
                 .then((result) => {
-                    console.log("result :>> ", result);
                     this.currentImageId = null;
                     history.pushState({}, "", "/");
-                    // FILTER THE IMAGES FROM THE ARRAY TO REMOVE IT
                 })
                 .catch((err) => {
                     console.log("err :>> ", err);

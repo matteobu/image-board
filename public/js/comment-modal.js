@@ -7,7 +7,7 @@ const comment = {
         };
     },
     mounted() {
-        console.log("Comment Modal MOUNTED");
+        console.log("COMMENT COMPONENT MOUNTED");
         fetch("/comments/" + this.id)
             .then((response) => response.json())
             .then(({ rows }) => {
@@ -26,7 +26,7 @@ const comment = {
     </form>
     <div id="comment-grid">
     <div v-for="comment in comments">
-        <h5>{{comment.username}} commented {{comment.comment}} on {{comment.created_at}}</h5></>
+        <h5>{{comment.username}} commented "{{comment.comment}}" on:{{comment.created_at.slice(0,10)}}   h:{{comment.created_at.slice(11, 16)}}</h5></>
     </div>
 </div>
     </div>

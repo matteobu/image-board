@@ -12,6 +12,7 @@ const modal = {
         };
     },
     mounted() {
+        console.log("IMAGE COMPONENT MOUNTED");
         if (isNaN(this.id)) {
             // console.log("isNAN IS WORKING");
             this.$emit("off-error");
@@ -44,14 +45,15 @@ const modal = {
     <h6 @click="functionToCloseModal(null)" class="close-in-images">close</h6>
 
     <img class="img-in-modal" :src="url">
-    <h5>uploaded by {{username}} on {{created_at}}</h5> 
+    <h5>uploaded by {{username}} on: {{created_at.slice(0,10)}}</h5> 
     <div class="title-in-comment">{{title}}</div> 
     <h6>description: {{description}}</h6> 
 
     
 
     <comment-modal v-if="id" :id="id"> </comment-modal>
-    <h6 @click="functionToDeleteImage()">DELETE</h6>
+    <div class="delete-immage-image-modal" @click="functionToDeleteImage()">DELETE IMAGE</div>  
+
 
 
     </div>  

@@ -106,7 +106,7 @@ h4 {
 .image-modal {
     display: grid;
     /* grid-template-rows: repeat(auto-fit, minmax(auto-fit, 1fr)); */
-    grid-template-rows: 18px 360px 18px 50px 35px;
+    grid-template-rows: 18px 360px 18px 50px 35px auto 20px;
     border: 2px solid #f0a500;
     background-color: linen;
     height: 700px;
@@ -157,4 +157,14 @@ h6 {
     border-bottom: 1px solid #f0a500;
     justify-content: center;
     align-items: center;
+}
+.delete-immage-image-modal {
+    justify-self: self-end;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 2px;
+    border: 1px solid #f0a500;
+    border-radius: 10px;
+    color: #334756;
+    background-color: #f0a40048;
 }

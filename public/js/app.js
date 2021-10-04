@@ -1,8 +1,6 @@
 import * as Vue from "./vue.js";
 import { imageModal } from "./image-modal.js";
 
-
-
 Vue.createApp({
     data() {
         return {
@@ -56,6 +54,12 @@ Vue.createApp({
                     this.images.unshift(result[0]);
                 })
                 .catch((err) => console.log(err));
+        },
+        resetInput() {
+            this.title = "";
+            this.description = "";
+            this.username = "";
+            this.file = null;ß
         },
 
         moreImages() {
